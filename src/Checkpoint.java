@@ -7,30 +7,49 @@ import java.util.stream.Stream;
 
 public class Checkpoint {
 	public static void main(String[] args) {
-		/*
-		 * The auto-mgp.data file contains the miles-per-gallon data on various different types of cars.
-		 * Each line of the file provides the data for one CarMPGEntry object.
-		 * (source: http://archive.ics.uci.edu/ml/datasets)
-		 * 
-		 * Use the method provided to get an ArrayList of CarMPGEntry objects. Convert the ArrayList into a Stream.
-		 * Using streams, perform the following:
-		 * 
-		 * 1. Print the entire list.
-		 * 
-		 * 
-		 * 2. Print the miles per gallon of each entry.
-		 * 
-		 * 
-		 * 3. Print alphabetized car names of the list.
-		 * 
-		 * 
-		 * 4. Print the list with all 8 cylinder cars removed.
-		 * 
-		 * 
-		 * 5. Print only the cars with "toyota" in the name.
-		 */
 		
+//		  The auto-mgp.data file contains the miles-per-gallon data on various different types of cars.
+//		  Each line of the file provides the data for one CarMPGEntry object.
+//		  (source: http://archive.ics.uci.edu/ml/datasets)
+//		  
+//		  Use the method provided to get an ArrayList of CarMPGEntry objects. Convert the ArrayList into a Stream.
+//		  Using streams, perform the following:
+		Stream <CarMPGEntry> cmpg= readCarMPGEntryDataFromFile().stream();
+		Stream <CarMPGEntry> cmpg2= readCarMPGEntryDataFromFile().stream();
+		Stream <CarMPGEntry> cmpg3= readCarMPGEntryDataFromFile().stream();
+		Stream <CarMPGEntry> cmpg4= readCarMPGEntryDataFromFile().stream();
+		Stream <CarMPGEntry> cmpg5= readCarMPGEntryDataFromFile().stream();
+
+//		  1. Print the entire list.
+		cmpg.forEach((l)->System.out.println(l));
+		cmpg.close();
+//		  2. Print the miles per gallon of each entry.
+		cmpg4.forEach((l)->System.out.println(l.mpg));
+
+//		  3. Print alphabetized car names of the list.
+//		cmpg.sorted((CarMPGEntry car1, CarMPGEntry car2)->{
+//			return car1.carName.compareTo(car2.carName);
+//		});
 		
+		cmpg2.forEach((l)->System.out.println(l));
+//		  
+//		  4. Print the list with all 8 cylinder cars removed.
+		cmpg5.filter((CarMPGEntry t)->{
+			  CarMPGEntry car=t;
+			  if (car.cylinders!=8) {
+				  System.out.println(car.carName);
+			  }
+				return car.carName.contains("toyota");
+			});
+		  
+//		  5. Print only the cars with "toyota" in the name.
+		  cmpg3.filter((CarMPGEntry t)->{
+			  CarMPGEntry car=t;
+			  System.out.println(car.carName);
+				return car.carName.contains("toyota");
+				
+			});
+		  //cmpg.forEach((l)->System.out.println(l));
 	}
 	
 	public static ArrayList<CarMPGEntry> readCarMPGEntryDataFromFile(){
